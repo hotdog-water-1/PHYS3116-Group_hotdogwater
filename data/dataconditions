@@ -1,0 +1,2 @@
+Stellar Kinematics Data Products (DR3StelKin)
+For safe usage, we recommend only using data which meet the following criteria: (SIG_ERR < SIG * 0.1 + 25) & SN > 20 & SIG > 70 & VEL_ERR < 30 km s−1.
