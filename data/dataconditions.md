@@ -32,4 +32,15 @@ SIGMA_4_ARCSEC_ERR | 1-sigma error on sigma_4_arcsec<br>
 ## Input, photometric and observational catalogues (InputCatGAMADR3, DR3InputCatClusters, Dr3VisualMorphology)
 https://docs.datacentral.org.au/sami/data-release-3/input-and-photometric-catalogues/<br>
 A parameter ISBEST indicates in the case of repeats which data is considered the best, based on seeing and S/N. Other flags indicate missing data, or value added products, and other calibration of measurement problems or warnings.<br>
-The BAD_CLASS parameter flags various problems with the input data, and the definition of these different classes are given in the table below and also in Bryant et al. (2015). Objects with BAD_CLASS = 0, 5 or 8 are potential targets to be observed.
+The BAD_CLASS parameter flags various problems with the input data, and the definition of these different classes are given in the table below and also in Bryant et al. (2015). Objects with BAD_CLASS = 0, 5 or 8 are potential targets to be observed.<br>
+
+BAD_CLASS value     Description 	                                Observe (Y/N)
+0 	                Object is okay 	                                Y
+1 	                Nearby bright star 	                            N
+2 	                Target is a star 	                            N
+3 	                Subcomponent of a galaxy 	                    N
+4 	                Very large low-redshift galaxy 	                N
+5 	                IFU position requires offset 	                Y
+6 	                Poor redshift from input catalogue          	N
+7 	                Other problems 	                                N
+8 	                Smaller galaxy of a close pair of galaxies. 	Y 
