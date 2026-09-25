@@ -31,4 +31,5 @@ SIGMA_4_ARCSEC_ERR | 1-sigma error on sigma_4_arcsec<br>
 
 ## Input, photometric and observational catalogues (InputCatGAMADR3, DR3InputCatClusters, Dr3VisualMorphology)
 https://docs.datacentral.org.au/sami/data-release-3/input-and-photometric-catalogues/<br>
-A parameter ISBEST indicates in the case of repeats which data is considered the best, based on seeing and S/N. Other flags indicate missing data, or value added products, and other calibration of measurement problems or warnings.
+A parameter ISBEST indicates in the case of repeats which data is considered the best, based on seeing and S/N. Other flags indicate missing data, or value added products, and other calibration of measurement problems or warnings.<br>
+The BAD_CLASS parameter flags various problems with the input data, and the definition of these different classes are given in the table below and also in Bryant et al. (2015). Objects with BAD_CLASS = 0, 5 or 8 are potential targets to be observed.
