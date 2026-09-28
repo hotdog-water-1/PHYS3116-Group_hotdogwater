@@ -13,22 +13,21 @@ unified = photodata \
     .loc[lambda df: df["sigma_re_err"] <= 5] \
     .loc[lambda df: df["ellip"] < 0.5] \
     .loc[lambda df: df["type"].between(0, 0.5)] \
-    # Other potential filters: age, low rotational velocity, low star formation rate/older stars 
+    # age, low rotational velocity, low star formation rate/older stars 
 
 print(unified)
 
 fig, ax = plt.subplots()
-z = np.polyfit(unified["m_r"], unified["sigma_re"], 1)
+z = np.polyfit(np.log10(unified["sigma_re"]), unified["mstar"], 1)
 p = np.poly1d(z)
-ax.plot(unified["m_r"], p(unified["m_r"]))
-#
-ax.scatter(unified["m_r"], unified["sigma_re"], s = 5)
+ax.plot(np.log10(unified["sigma_re"]), p(np.log10(unified["sigma_re"])))
+# make scatter plot
+ax.scatter(np.log10(unified["sigma_re"]), unified["mstar"], s = 5)
 ax.invert_xaxis()
 
-plt.xlabel("$M_r$ (mags)")
-plt.ylabel("$\sigma$ (km/s)")
+plt.ylabel("$log(M_*)$")
+plt.xlabel("$\\sigma$ (km/s)")
+# plt.ylabel("log $\sigma$ (km/s)")
 plt.legend()
 plt.show()
-# 
-# print(photodata["m_r"])
-# print(skinedata["sigma_1_4_arcsecond"])
+
