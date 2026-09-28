@@ -13,8 +13,9 @@ unified = photodata \
     .merge(visualdata.set_index("catid"), on="catid").set_index("catid") \
     .loc[lambda df: df["bad_class"] == 0] \
     .loc[lambda df: df["sigma_re_err"] <= 5] \
-    .loc[lambda df: df["ellip"] < 0.5]
-    # .loc[lambda df: df["type"] <= 0]
+    .loc[lambda df: df["ellip"] < 0.5] \
+    .loc[lambda df: df["type"].between(0, 0.5)] \
+    # Other potential filters: age, low rotational velocity, low star formation rate/older stars 
 
 
 fig, axes = plt.subplots(2)
@@ -33,17 +34,15 @@ axes[0].plot(x, (-x)**res.slope * np.exp(res.intercept), label=f"y = x ^ {res.sl
 axes[0].invert_xaxis()
 
 fig, ax = plt.subplots()
-z = np.polyfit(unified["m_r"], np.log10(unified["sigma_re"]), 1)
+z = np.polyfit(unified["m_r"], unified["sigma_re"], 1)
 p = np.poly1d(z)
 ax.plot(unified["m_r"], p(unified["m_r"]))
 #
-# ax.scatter(unified["m_r"], unified["sigma_re"], s = 5)
-ax.scatter(unified["m_r"], np.log10(unified["sigma_re"]), s = 5)
+ax.scatter(unified["m_r"], unified["sigma_re"], s = 5)
 ax.invert_xaxis()
 
 plt.xlabel("$M_r$ (mags)")
-# plt.ylabel("$\sigma$ (km/s)")
-plt.ylabel("log $\sigma$ (km/s)")
+plt.ylabel("$\sigma$ (km/s)")
 plt.legend()
 plt.show()
 
