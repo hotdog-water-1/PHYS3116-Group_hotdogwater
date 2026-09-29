@@ -26,23 +26,16 @@ axes[1].scatter(x_vals, y_vals, s = 5)
 
 res = linregress(x_vals, y_vals)
 x = np.linspace(2.9, 3.1, 3)
-axes[1].plot(x, res.slope * x + res.intercept, label=f"y = {res.slope} x + {res.intercept}")
+axes[1].plot(x, res.slope * x + res.intercept, label=f"y = {res.slope:.2e} x + {res.intercept:.2e}")
 
 axes[0].scatter(unified["m_r"], unified["sigma_re"], s = 5)
-x = np.linspace(-18, -23, 200)
-axes[0].plot(x, (-x)**res.slope * np.exp(res.intercept), label=f"y = x ^ {res.slope} * exp({res.intercept})")
+x = np.linspace(-19, -22, 200)
+axes[0].plot(x, (-x)**res.slope * np.exp(res.intercept), label=f"y = x ^ {res.slope:.2e} * exp({res.intercept:.2e})")
 axes[0].invert_xaxis()
+print(f"y = x ^ {res.slope:.2e} * exp({res.intercept:.2e})")
 
-fig, ax = plt.subplots()
-z = np.polyfit(unified["m_r"], unified["sigma_re"], 1)
-p = np.poly1d(z)
-ax.plot(unified["m_r"], p(unified["m_r"]))
-#
-ax.scatter(unified["m_r"], unified["sigma_re"], s = 5)
-ax.invert_xaxis()
-
-plt.xlabel("$M_r$ (mags)")
-plt.ylabel("$\sigma$ (km/s)")
+axes[0].set_xlabel(r"$M_r$ (mags)")
+axes[0].set_ylabel(r"$\sigma$ (km/s)")
 plt.legend()
 plt.show()
 
