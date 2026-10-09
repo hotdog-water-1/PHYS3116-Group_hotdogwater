@@ -9,20 +9,19 @@ skinedata = pd.read_csv("data/samiDR3StelKin.csv")
 visualdata = pd.read_csv("data/samiDR3VisualMorphology.csv")
 
 sigma = "sigma_re"
-mag_min = 20.4
-mag_max = 20.5
-unified = photodata \
-    .merge(skinedata.set_index("catid"), on="catid") \
-    .merge(visualdata.set_index("catid"), on="catid").set_index("catid") \
-    .loc[lambda df: (df["bad_class"] == 0)] \
-    .loc[lambda df: df[sigma + "_err"] <= df[sigma] * 0.1 + 25] \
-    .loc[lambda df: df[sigma] > 100] \
-    .loc[lambda df: df["ellip"] < 0.5] \
-    .loc[lambda df: df["type"].between(0, 0.5)] \
-    .loc[lambda df: df["mstar"] < 15] \
-    .loc[lambda df: (mag_min < -df["m_r"]) & (-df["m_r"] < mag_max)]
-    
-    
+mag_min = 20
+mag_max = 21.5
+unified = (photodata 
+    .merge(skinedata.set_index("catid"), on="catid")
+    .merge(visualdata.set_index("catid"), on="catid").set_index("catid")
+    .loc[lambda df: (df["bad_class"] == 0)]
+    .loc[lambda df: df[sigma + "_err"] <= df[sigma] * 0.1 + 25]
+    .loc[lambda df: df[sigma] > 100]
+    .loc[lambda df: df["ellip"] < 0.5]
+    .loc[lambda df: df["type"].between(0, 0.5)]
+    .loc[lambda df: df["mstar"] < 15]
+    # .loc[lambda df: (mag_min < -df["m_r"]) & (-df["m_r"] < mag_max)]
+)
     # Other potential filters: age, low rotational velocity, low star formation rate/older stars 
 
 
