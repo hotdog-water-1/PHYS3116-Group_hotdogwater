@@ -31,7 +31,6 @@ Lv_axes = (axes[0][0], axes[1][0])
 vM_axes = (axes[0][1], axes[1][1])
 
 x_vals = np.log10(-unified["m_r"])
-print(x_vals)
 y_vals = np.log10(unified[sigma])
 Lv_axes[1].invert_xaxis()
 Lv_axes[1].scatter(x_vals, y_vals, s = 5)
@@ -45,13 +44,14 @@ Lv_axes[0].scatter(unified["m_r"], unified[sigma], s = 5)
 x = np.linspace(min(unified["m_r"]), max(unified["m_r"]), 200)
 Lv_axes[0].plot(x, 10**(res.intercept) * (-x) ** res.slope, label=rf"$\sigma$ = {10**res.intercept:.2e} $\cdot$ L ^ ({res.slope:.2e})", color="r")
 Lv_axes[0].invert_xaxis()
-print(rf"y = {10**res.intercept:.2e} $\cdot$ 10 ^ ({res.slope:.2e} * x)")
+print(f"R2 = {res.rvalue:.3f}")
+print(rf"y = {10**res.intercept:.2e} $\cdot$ L ^ ({res.slope:.2e})")
+
 
 Lv_axes[0].set_xlabel(r"$M_r$ (mags)")
 Lv_axes[0].set_ylabel(r"$\sigma$ (km/s)")
 Lv_axes[0].legend()
 plt.legend()
-
 
 
 x_vals = np.log10(unified[sigma])
@@ -60,14 +60,18 @@ y_vals = unified["mstar"]
 vM_axes[1].scatter(x_vals, y_vals, s = 5)
 
 res = linregress(y_vals, x_vals)
+
 y = np.linspace(min(y_vals), max(y_vals), 3)
 vM_axes[1].plot(res.slope * y + res.intercept, y, label=rf"$log10(\sigma)$ = {res.slope:.2e} M + {res.intercept:.2e}", color="r")
 vM_axes[1].legend()
 
+
+
 vM_axes[0].scatter(unified[sigma], unified["mstar"], s = 5)
-y = np.linspace(min(y_vals), max(y_vals), 200)
+y = 10**np.linspace(min(y_vals), max(y_vals), 200)
 vM_axes[0].plot(10**(y * res.slope + res.intercept), y, label=rf"$\sigma$ = {10**res.intercept:.2e} $\cdot$ 10 ^ ({res.slope:.2e} M)", color="r")
 
+print(f"R2 = {res.rvalue:.3f}")
 print(rf"y = {10**res.intercept:.2e} $\cdot$ 10 ^ ({res.slope:.2e} M)")
 
 vM_axes[0].set_xlabel(r"$M_r$ (mags)")
