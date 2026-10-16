@@ -17,7 +17,7 @@ unified = (photodata
     .loc[lambda df: (df["bad_class"] == 0)]
     .loc[lambda df: df[sigma + "_err"] <= df[sigma] * 0.1 + 25]
     .loc[lambda df: df[sigma] > 100]
-    .loc[lambda df: df["ellip"] <= 0.3]
+    .loc[lambda df: df["ellip"] <= 0.4]
     .loc[lambda df: df["type"].between(0, 0.5)]
     .loc[lambda df: df["mstar"] > 10]
     .loc[lambda df: df["g_i"] > 1] 
