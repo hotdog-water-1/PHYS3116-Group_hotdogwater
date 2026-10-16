@@ -18,13 +18,14 @@ unified = (photodata
     .loc[lambda df: (df["bad_class"] == 0)]
     .loc[lambda df: df[velocity_dispersion + "_err"] <= df[velocity_dispersion] * 0.1 + 25]
     .loc[lambda df: df[velocity_dispersion] > 100]
-    .loc[lambda df: df["ellip"] < 0.5]
+    .loc[lambda df: df["ellip"] <= 0.4]
     .loc[lambda df: df["type"].between(0, 0.5)]
-    .loc[lambda df: df["mstar"] < 15]
+    .loc[lambda df: df["mstar"] > 10]
+    .loc[lambda df: df["g_i"] > 1] 
+    # .loc[lambda df: df["lambdar_re"].abs() <= 0.5] 
     # .loc[lambda df: (mag_min < -df["m_r"]) & (-df["m_r"] < mag_max)]
 )
-    # Other potential filters: age, low rotational velocity, low star formation rate/older stars 
-
+    # Not too sure how to use spin parameter as alot of the entries are unusable and so it would restrict the data set too much
 
 # ------ Data Processing ------
 fig, axes = plt.subplots(2, 2)
