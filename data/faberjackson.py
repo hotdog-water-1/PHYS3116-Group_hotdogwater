@@ -32,20 +32,21 @@ fig, axes = plt.subplots(2, 2)
 Lv_axes = (axes[0][0], axes[1][0])
 Lv_axes[0].set_xlabel(r"$M_r$ (mags)")
 Lv_axes[0].set_ylabel(r"$\sigma$ (km/s)")
-Lv_axes[0].invert_xaxis()
-Lv_axes[1].invert_xaxis()
-x_vals = np.log10(-unified["m_r"])
+# Lv_axes[0].invert_xaxis()
+# Lv_axes[1].invert_xaxis()
+x_vals = -unified["m_r"]
 y_vals = np.log10(unified[velocity_dispersion])
 res = linregress(x_vals, y_vals)
 
-Lv_axes[0].scatter(unified["m_r"], unified[velocity_dispersion], s = 5)
+Lv_axes[0].scatter(x_vals, 10**y_vals, s = 5)
 Lv_axes[1].scatter(x_vals, y_vals, s = 5)
 
 x = np.linspace(min(x_vals), max(x_vals), 3)
 Lv_axes[1].plot(x, res.slope * x + res.intercept, label=rf"$log10(\sigma)$ = {res.slope:.2e} L + {res.intercept:.2e}", color="r")
 
-x = np.linspace(min(unified["m_r"]), max(unified["m_r"]), 200)
-Lv_axes[0].plot(x, 10**(res.intercept) * (-x) ** res.slope, label=rf"$\sigma$ = {10**res.intercept:.2e} $\cdot$ L ^ ({res.slope:.2e})", color="r")
+x = np.linspace(min(x_vals), max(x_vals), 200)
+print(10**(res.intercept) * x ** res.slope)
+Lv_axes[0].plot(x, 10**(res.intercept) * 10 ** (res.slope * x), label=rf"$\sigma$ = {10**res.intercept:.2e} $\cdot$ 10 ^ ({res.slope:.2e} $\cdot$ L)", color="r")
 
 print(rf"y = {10**res.intercept:.2e} $\cdot$ L ^ ({res.slope:.2e})")
 print(f"R2 = {res.rvalue:.3f}")
