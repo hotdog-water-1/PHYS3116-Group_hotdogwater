@@ -2,7 +2,7 @@
 https://docs.datacentral.org.au/sami/data-release-3/stellar-kinematics-data-products/<br>
 For safe usage, we recommend only using data which meet the following criteria: 
 - (SIG_ERR < SIG * 0.1 + 25)
-- SN > 20 & SIG > 70 
+- SN > 20 & SIG > 70
 - VEL_ERR < 30 km s−1
 
 4.2.2 Velocity Dispersion values
@@ -43,4 +43,4 @@ BAD_CLASS value     Description 	                                Observe (Y/N)
 5 	                IFU position requires offset 	                Y
 6 	                Poor redshift from input catalogue          	N
 7 	                Other problems 	                                N
-8 	                Smaller galaxy of a close pair of galaxies. 	Y 
+8 	                Smaller galaxy of a close pair of galaxies. 	Y
