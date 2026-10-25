@@ -59,6 +59,16 @@ vM_axes = (axes[0][1], axes[1][1])
 vM_axes[0].set_xlabel(r"$\sigma$ (km/s)")
 vM_axes[0].set_ylabel(r"$M*$ (solar masses)")
 
+'''
+x: sigma
+y: log10(mass)
+
+y = m log10(x) + b
+
+y2(10**y) = 10**(b) * x^m
+
+'''
+
 x_vals = np.log10(unified[velocity_dispersion])
 y_vals = unified["mstar"]
 res = linregress(x_vals, y_vals)
@@ -67,10 +77,10 @@ vM_axes[0].scatter(10**x_vals, 10**y_vals, s = 5)
 vM_axes[1].scatter(x_vals, y_vals, s = 5)
 
 x = np.linspace(min(x_vals), max(x_vals), 3)
-vM_axes[1].plot(x, res.intercept + x * res.slope, label=rf"$log10(\sigma)$ = {res.slope:.2e} M + {res.intercept:.2e}", color="r")
+vM_axes[1].plot(x, res.intercept + x * res.slope, label=rf"$log10(M)$ = {res.slope:.2e} log10($\sigma$) + {res.intercept:.2e}", color="r")
 
 x = 10**np.linspace(min(x_vals), max(x_vals), 200)
-vM_axes[0].plot(x, 10**res.intercept * x ** res.slope, label=rf"$\sigma$ = {10**res.intercept:.2e} $\cdot$ M ^ ({res.slope:.2e})", color="r")
+vM_axes[0].plot(x, 10**res.intercept * x ** res.slope, label=rf"$M$ = {10**res.intercept:.2e} $\cdot$ $\sigma$ ^ ({res.slope:.2e})", color="r")
 
 print(f"R2 = {res.rvalue:.3f}")
 print(rf"y = {10**res.intercept:.2e} $\cdot$ 10 ^ ({res.slope:.2e} M)")
