@@ -21,9 +21,10 @@ unified = (photodata
     .loc[lambda df: df["ellip"] < 0.4]
     .loc[lambda df: df["type"].between(0, 0.5)]
     .loc[lambda df: df["mstar"] > 10]
-    .loc[lambda df: df["g_i"] > 1]
+    # .loc[lambda df: df["g_i"] > 1]
 )
     # Not too sure how to use spin parameter as alot of the entries are unusable and so it would restrict the data set too much
+    # Adding the colour filter does not significantly impact the data
 
 
 # ------ Data Processing ------
