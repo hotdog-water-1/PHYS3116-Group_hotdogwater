@@ -21,8 +21,10 @@ unified = (photodata
     .loc[lambda df: df["ellip"] < 0.4]
     .loc[lambda df: df["type"].between(0, 0.5)]
     .loc[lambda df: df["mstar"] > 10]
+    # .loc[lambda df: df["g_i"] > 1]
 )
     # Not too sure how to use spin parameter as alot of the entries are unusable and so it would restrict the data set too much
+    # Adding the colour filter does not significantly impact the data
 
 
 # ------ Data Processing ------
@@ -31,6 +33,8 @@ fig, axes = plt.subplots(2, 2)
 Lv_axes = (axes[0][0], axes[1][0])
 Lv_axes[0].set_xlabel(r"$M_r$ (mags)")
 Lv_axes[0].set_ylabel(r"$\sigma$ (km/s)")
+Lv_axes[1].set_xlabel(r"$M_r$ (mags)")
+Lv_axes[1].set_ylabel(r"$\sigma$ (km/s)")
 # Lv_axes[0].invert_xaxis()
 # Lv_axes[1].invert_xaxis()
 x_vals = -unified["m_r"]
@@ -56,8 +60,10 @@ plt.legend()
 
 
 vM_axes = (axes[0][1], axes[1][1])
-vM_axes[0].set_xlabel(r"$\sigma$ (km/s)")
-vM_axes[0].set_ylabel(r"$M*$ (solar masses)")
+vM_axes[0].set_ylabel(r"$\sigma$ (km/s)")
+vM_axes[0].set_xlabel(r"$\log(M*)$ (solar masses)")
+vM_axes[1].set_ylabel(r"$\sigma$ (km/s)")
+vM_axes[1].set_xlabel(r"$\log(M*)$ (solar masses)")
 
 '''
 x: sigma
@@ -71,6 +77,7 @@ y2(10**y) = 10**(b) * x^m
 
 x_vals = np.log10(unified[velocity_dispersion])
 y_vals = unified["mstar"]
+
 res = linregress(x_vals, y_vals)
 
 vM_axes[0].scatter(10**x_vals, 10**y_vals, s = 5)
