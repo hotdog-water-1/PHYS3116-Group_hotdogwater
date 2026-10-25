@@ -34,7 +34,7 @@ Lv_axes = (axes[0][0], axes[1][0])
 Lv_axes[0].set_xlabel(r"$M_r$ (mags)")
 Lv_axes[0].set_ylabel(r"$\sigma$ (km/s)")
 Lv_axes[1].set_xlabel(r"$M_r$ (mags)")
-Lv_axes[1].set_ylabel(r"$\sigma$ (km/s)")
+Lv_axes[1].set_ylabel(r"log10($\sigma$) (km/s)")
 # Lv_axes[0].invert_xaxis()
 # Lv_axes[1].invert_xaxis()
 x_vals = -unified["m_r"]
@@ -60,10 +60,10 @@ plt.legend()
 
 
 vM_axes = (axes[0][1], axes[1][1])
-vM_axes[0].set_ylabel(r"$\sigma$ (km/s)")
-vM_axes[0].set_xlabel(r"$\log(M*)$ (solar masses)")
-vM_axes[1].set_ylabel(r"$\sigma$ (km/s)")
-vM_axes[1].set_xlabel(r"$\log(M*)$ (solar masses)")
+vM_axes[0].set_xlabel(r"$\sigma$ (km/s)")
+vM_axes[0].set_ylabel(r"$M*$ (solar masses)")
+vM_axes[1].set_xlabel(r"log10($\sigma$) (km/s)")
+vM_axes[1].set_ylabel(r"$\log(M*)$ (solar masses)")
 
 '''
 x: sigma
